@@ -1,8 +1,13 @@
 // import React from 'react'
 
+import { useContext } from "react"
+import { PokemonContext } from "../context/PokemonContext"
+
 const FilterBar = () => {
+	const {active} = useContext(PokemonContext)
+
   return (
-    <div className={`container-filters active`}>
+    <div className={`container-filters ${active ? 'active' : ''}`}>
 			<div className='filter-by-type'>
 				<span>Tipo</span>
 

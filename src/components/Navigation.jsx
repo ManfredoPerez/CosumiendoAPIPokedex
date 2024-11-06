@@ -1,12 +1,23 @@
 // import React from 'react'
 
 import { useContext } from "react"
-import { Link, Outlet } from "react-router-dom"
+import { Link, Outlet, useNavigate } from "react-router-dom"
 import { PokemonContext } from "../context/PokemonContext"
 
 const Navigation = () => {
-  const {} = useContext(PokemonContext)
+  const {onInputChange, valueSearch, onResetForm} = useContext(PokemonContext)
   // console.log(numero)
+
+  const navigate = useNavigate()
+
+  const onSearchSubmit = (e) => {
+    e.preventDefault()
+    navigate('/search', {
+      state: valueSearch
+    })
+
+    onResetForm();
+  }
 
   return (
     <>
@@ -18,8 +29,8 @@ const Navigation = () => {
             />
           </Link>
 
-          {/* <form onSubmit={onSearchSubmit}> */}
-          <form>
+          <form onSubmit={onSearchSubmit}>
+          {/* <form> */}
             <div className="form-group">
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -39,8 +50,8 @@ const Navigation = () => {
                 type='search'
                 name='valueSearch'
                 id=''
-                // value={valueSearch}
-                // onChange={onInputChange}
+                value={valueSearch}
+                onChange={onInputChange}
                 placeholder='Buscar nombre de Pokemon'
               />
             </div>
